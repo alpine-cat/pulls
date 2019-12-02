@@ -1,0 +1,22 @@
+<h1>{{ question.question_text }}</h1>
+{% if error_message %} <p><strong> {{error_message}} </strong></p> {% endif%}
+
+<form action="{% url 'details' %}" method="post">
+    {% csrf_token %}
+
+    {% for field in form %}
+        <div>
+            {{ field.value }}
+            {{ field.help_text }}
+            {{ field.errors }}
+            {{ field.html_name }}
+        </div>
+        <input name="{{ field.html_name }}">
+        <label for = "{{ field.id_for_label }}">{{ field.label }}</label>
+    {% endfor%}
+    {{ form.question }}
+    {{ form.question.errors }}
+    
+    <input type="submit" value="Vote">
+</form>
+
